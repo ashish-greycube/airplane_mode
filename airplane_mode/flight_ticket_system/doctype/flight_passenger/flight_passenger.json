@@ -1,7 +1,6 @@
 {
  "actions": [],
- "allow_rename": 1,
- "autoname": "format:PAX-{####}",
+ "autoname": "autoincrement",
  "creation": "2023-06-16 11:44:47.057133",
  "default_view": "List",
  "doctype": "DocType",
@@ -40,11 +39,11 @@
    "link_fieldname": "passenger"
   }
  ],
- "modified": "2023-06-17 07:55:22.696209",
+ "modified": "2023-06-17 16:11:07.439514",
  "modified_by": "Administrator",
  "module": "Flight ticket system",
  "name": "Flight Passenger",
- "naming_rule": "Expression",
+ "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [
   {

@@ -11,7 +11,7 @@
  "is_hidden": 0,
  "label": "Airplane Mode",
  "links": [],
- "modified": "2023-06-17 09:13:23.763852",
+ "modified": "2023-06-17 09:29:26.759233",
  "modified_by": "Administrator",
  "module": "Flight ticket system",
  "name": "Airplane Mode",
@@ -23,17 +23,17 @@
  "sequence_id": 1.0,
  "shortcuts": [
   {
-   "color": "Grey",
+   "color": "Green",
    "doc_view": "List",
-   "label": "All Passengers",
-   "link_to": "Flight Passenger",
+   "label": "All Airplanes",
+   "link_to": "Airplane",
    "type": "DocType"
   },
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "All Airplanes",
-   "link_to": "Airplane",
+   "label": "All Passengers",
+   "link_to": "Flight Passenger",
    "type": "DocType"
   },
   {
