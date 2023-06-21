@@ -1,0 +1,1 @@
+{{ doc.name }} will depart in 24 hours.
