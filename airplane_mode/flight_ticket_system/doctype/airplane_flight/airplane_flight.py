@@ -7,4 +7,5 @@ from frappe.model.document import Document
 
 
 class AirplaneFlight(WebsiteGenerator):
-    pass
+    def on_submit(self):
+        self.status = "Completed"
