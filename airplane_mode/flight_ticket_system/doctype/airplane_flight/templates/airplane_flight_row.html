@@ -1,0 +1,20 @@
+<!-- this is a sample default list template -->
+{% set airline = frappe.db.get_value("Airplane",doc.airplane,"airline") %}
+<div class="card h-100 w-300 justify-content-between my-2">
+  <div class="card-body">
+    <h5 class="card-title">{{ airline }}</h5>
+    <p class="card-subtitle mb-2 text-muted">
+      {{ doc.source_airport_code }} to {{doc.destination_airport_code }}
+    </p>
+    <p class="card-text">
+      {{ frappe.utils.format_date(doc.date_of_departure, "d MMMM, YYYY") }} |
+      {{doc.time_of_departure}} | {{ frappe.utils.format_duration(doc.duration)
+      }}
+    </p>
+  </div>
+  {% if doc.docstatus == 1 and doc.route and doc.is_published %}
+  <div class="card-body flex-grow-0">
+    <a href="/{{doc.route}}" class="card-link">{{ _('View Flight') }}</a>
+  </div>
+  {% endif %}
+</div>

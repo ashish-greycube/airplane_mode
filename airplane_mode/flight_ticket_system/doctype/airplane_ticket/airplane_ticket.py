@@ -3,23 +3,28 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe import _
+from frappe.utils import flt, cint, cstr
+from random import randint, choice
+
 
 class AirplaneTicket(Document):
+    def before_insert(self):
+        self.set_seat_number()
 
-	def validate(self):
-		add_ons = []
-		for item in self.add_ons:
-			if item.add_on_type in add_ons:
-				frappe.throw(f"Duplicate add-on item found: {item.add_on_type}")
-			add_ons.append(item.add_on_type)
-	
-	def before_save(self):
-		add_on_item = self.add_ons
+    def validate(self):
+        # remove duplicates in add ons
+        add_ons = {d.item: d for d in self.add_ons}
+        self.add_ons = add_ons.values()
 
-		total_add_on_amount_sum = 0
-		for item in add_on_item:
-			total_add_on_amount_sum += item.amount
+        # set total amount
+        self.total_amount = flt(self.flight_price) + sum(
+            [flt(d.amount) for d in self.add_ons]
+        )
 
-		self.total_amount = (self.ticket_price) + (total_add_on_amount_sum)
-		
+    def before_submit(self):
+        if not self.status == "Boarded":
+            frappe.throw(_("Cannot submit Ticket when status is not Boarded."))
 
+    def set_seat_number(self):
+        self.seat = cstr(randint(1, 300)) + choice(["A", "B", "C", "D", "E"])
