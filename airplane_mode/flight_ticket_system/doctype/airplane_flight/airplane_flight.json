@@ -23,9 +23,9 @@
   "duration",
   "column_break_iem33",
   "time_of_departure",
-  "amended_from",
   "route",
-  "is_published"
+  "is_published",
+  "amended_from"
  ],
  "fields": [
   {
@@ -151,7 +151,7 @@
    "link_fieldname": "flight"
   }
  ],
- "modified": "2023-06-21 07:30:40.071734",
+ "modified": "2023-06-28 17:24:37.253586",
  "modified_by": "Administrator",
  "module": "Flight ticket system",
  "name": "Airplane Flight",
@@ -169,6 +169,48 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Travel Agent",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Airport Authority Personnel",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Flight Crew Member",
+   "share": 1
   }
  ],
  "route": "flights",
