@@ -9,10 +9,16 @@ from random import randint, choice
 
 
 class AirplaneTicket(Document):
-    # def before_insert(self):
-    #     self.set_seat_number()
+    def before_insert(self):
+        if not self.seat:
+            self.set_seat_number()
+
+    def set_seat_number(self):
+        self.seat = cstr(randint(1, 300)) + choice(["A", "B", "C", "D", "E"])
 
     def validate(self):
+        self.validate_seat_count()
+
         # remove duplicates in add ons
         add_ons = {d.item: d for d in self.add_ons}
         self.add_ons = add_ons.values()
@@ -22,20 +28,18 @@ class AirplaneTicket(Document):
             [flt(d.amount) for d in self.add_ons]
         )
 
-        airplane = frappe.get_value('Airplane Flight', self.flight, 'airplane')
-        if airplane:
-			# Get the capacity of the airplane
-            airplane_capacity = frappe.get_value('Airplane', airplane, 'capacity')
-			
-			# Count the number of existing tickets for the flight
-            existing_tickets = frappe.get_all('Airplane Ticket', filters={'flight': self.flight}, as_list=True)
-            if existing_tickets and len(existing_tickets) >= airplane_capacity:
-                frappe.throw(_("The number of tickets for this flight has reached the maximum capacity of the airplane."))
+    def validate_seat_count(self):
+        n_tickets = len(
+            frappe.get_all(
+                "Airplane Ticket",
+                filters={"flight": self.flight},
+            )
+        )
+        airplane = frappe.get_value("Airplane Flight", self.flight, "airplane")
+        capacity = frappe.db.get_value("Airplane", airplane, "capacity")
+        if not n_tickets < capacity:
+            frappe.throw(_("Sorry. No seats available on this flight."))
 
     def before_submit(self):
         if not self.status == "Boarded":
             frappe.throw(_("Cannot submit Ticket when status is not Boarded."))
-
-    # def set_seat_number(self):
-    #     self.seat = cstr(randint(1, 300)) + choice(["A", "B", "C", "D", "E"])
-
